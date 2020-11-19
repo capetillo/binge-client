@@ -13,16 +13,19 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 export default function Routes() {
   return (
     <Switch>
+      <Route exact path="/">
+          <Home />
+      </Route>
      <UnauthenticatedRoute exact path="/login">
         <Login />
     </UnauthenticatedRoute>
     <UnauthenticatedRoute exact path="/signup">
         <Signup />
     </UnauthenticatedRoute>
-    <AuthenticatedRoute exact path="/movies/new">
+    <AuthenticatedRoute exact path="/swipe/new">
         <NewMovie />
     </AuthenticatedRoute>
-    <AuthenticatedRoute exact path="/movies/:id">
+    <AuthenticatedRoute exact path="/swipe/:id">
         <Movies />
     </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}

@@ -1,8 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import Form from "react-bootstrap/Form";
 import { API, Storage } from "aws-amplify";
+import { useParams, useHistory } from "react-router-dom";
+import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { s3Upload } from "../libs/awsLib";
+import config from "../config";
+import "./Movies.css";
 
 
 export default function Movies() {
@@ -11,10 +15,12 @@ export default function Movies() {
   const history = useHistory();
   const [movie, setMovie] = useState(null);
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     function loadMovie() {
-      return API.get("movies", `/movies/${id}`);
+      return API.get("swipe", `/swipe/${id}`);
     }
 
     async function onLoad() {
@@ -49,7 +55,7 @@ export default function Movies() {
   }
   
   function saveMovie(movie) {
-    return API.put("movies", `/movies/${id}`, {
+    return API.put("swipe", `/swipe/${id}`, {
       body: movie
     });
   }
@@ -87,7 +93,7 @@ export default function Movies() {
   }
   
   function deleteMovie() {
-    return API.del("movies", `/movies/${id}`);
+    return API.del("swipe", `/swipe/${id}`);
   }
   
   async function handleDelete(event) {

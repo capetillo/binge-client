@@ -50,7 +50,7 @@ export default function NewMovie() {
   
   
   function createMovie(movie) {
-    return API.post("movie", "/movie", {
+    return API.post("swipe", "/swipe", {
       body: movie
     });
   }
