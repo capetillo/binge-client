@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { Link } from "react-router-dom";
-import { BsPencilSquare } from "react-icons/bs";
+import { FaHandPointUp } from "react-icons/fa";
 import ListGroup from "react-bootstrap/ListGroup";
 import { LinkContainer } from "react-router-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import "./Home.css";
+
+
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -41,8 +43,8 @@ export default function Home() {
       <>
         <LinkContainer to="/swipe/new">
           <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-            <BsPencilSquare size={17} />
-            <span className="ml-2 font-weight-bold">Create a new note</span>
+            <FaHandPointUp size={17} />
+            <span className="ml-2 font-weight-bold">swipe on movies</span>
           </ListGroup.Item>
         </LinkContainer>
         {movies.map(({ swipeId, content, createdAt }) => (

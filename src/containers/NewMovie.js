@@ -65,10 +65,6 @@ export default function NewMovie() {
             onChange={(e) => setContent(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
-          <Form.Control onChange={handleFileChange} type="file" />
-        </Form.Group>
         <LoaderButton
           block
           type="submit"
@@ -77,7 +73,7 @@ export default function NewMovie() {
           isLoading={isLoading}
           disabled={!validateForm()}
         >
-          Create
+          Add to Watchlist
         </LoaderButton>
       </Form>
     </div>
