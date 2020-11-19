@@ -8,6 +8,9 @@ import NewMovie from "./containers/NewMovie";
 import Movies from "./containers/Movies";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import ResetPassword from "./containers/ResetPassword";
+import ChangePassword from "./containers/ChangePassword";
+import Settings from "./containers/Settings";
 
 
 export default function Routes() {
@@ -19,14 +22,23 @@ export default function Routes() {
      <UnauthenticatedRoute exact path="/login">
         <Login />
     </UnauthenticatedRoute>
+    <UnauthenticatedRoute exact path="/login/reset">
+      <ResetPassword />
+    </UnauthenticatedRoute>
     <UnauthenticatedRoute exact path="/signup">
         <Signup />
     </UnauthenticatedRoute>
+    <AuthenticatedRoute exact path="/settings">
+        <Settings />
+      </AuthenticatedRoute>
     <AuthenticatedRoute exact path="/swipe/new">
         <NewMovie />
     </AuthenticatedRoute>
     <AuthenticatedRoute exact path="/swipe/:id">
         <Movies />
+    </AuthenticatedRoute>
+    <AuthenticatedRoute exact path="/settings/password">
+       <ChangePassword />
     </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
         <Route>

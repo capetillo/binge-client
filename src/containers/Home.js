@@ -66,7 +66,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
-        <p className="text-muted">A simple note taking app</p>
+        <p className="text-muted">Binge: where you swipe to match on movies I guess</p>
         <div className="pt-3">
           <Link to="/login" className="btn btn-info btn-lg mr-3">
             Login
@@ -82,7 +82,7 @@ export default function Home() {
   function renderMovies() {
     return (
       <div className="movies">
-        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Watchlist</h2>
         <ListGroup>{!isLoading && renderMoviesList(movies)}</ListGroup>
       </div>
     );
