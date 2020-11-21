@@ -47,11 +47,10 @@ export default function Home() {
             <span className="ml-2 font-weight-bold">swipe on movies</span>
           </ListGroup.Item>
         </LinkContainer>
-        {movies.map(({ swipeId, content, createdAt }) => (
+        {movies.map(({ swipeId, createdAt }) => (
           <LinkContainer key={swipeId} to={`/swipe/${swipeId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
-                {content.trim().split("\n")[0]}
               </span>
               <br />
               <span className="text-muted">

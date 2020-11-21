@@ -42,9 +42,9 @@ export default function Movies() {
     onLoad();
   }, [id]);
 
-  function validateForm() {
-    return content.length > 0;
-  }
+  // function validateForm() {
+  //   return content.length > 0;
+  // }
   
   function formatFilename(str) {
     return str.replace(/^\w+-/, "");
@@ -129,27 +129,13 @@ export default function Movies() {
               onChange={(e) => setContent(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="file">
-            <Form.Label>Attachment</Form.Label>
-            {movie.attachment && (
-              <p>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={movie.attachmentURL}
-                >
-                  {formatFilename(movie.attachment)}
-                </a>
-              </p>
-            )}
-            <Form.Control onChange={handleFileChange} type="file" />
-          </Form.Group>
+  
           <LoaderButton
             block
             size="lg"
             type="submit"
             isLoading={isLoading}
-            disabled={!validateForm()}
+            // disabled={!validateForm()}
           >
             Save
           </LoaderButton>
