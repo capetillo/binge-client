@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef} from "react";
-import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import { API } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
-import config from "../config";
 import "./SwipeRight.css";
 import { csv } from "d3"
 import data from "../data.csv"
@@ -21,29 +19,31 @@ export default function SwipeRight() {
 
 
   useEffect(() => {
-    displayMovie();
+    getTitle()
   }, [])
 
 
 
 function getTitle() {
+  console.log("step 1")
     csv(data)
     .then(response => {
       let random = response[Math.floor(Math.random() * 6235)].title
-      console.log("random", random)
-      // movie.push(random)
-      console.log("movie ,", movie)
+      console.log("this is random", random)
       let search_entry = random.split(" ").join("+")
-      console.log("search entry", search_entry)
       title.push(search_entry)
-      console.log("title", title)
-      console.log("title - 1 ", title[title.length-1])
+      console.log("end of first part of get title ", title)
+      displayMovie()
+      return title
+      
     })
+  
   }
   
-  function displayMovie() {
-    getTitle();
-    axios({
+  async function displayMovie() {
+    
+    console.log("title on display movie", title)
+   await axios({
       "method": "GET",
       "url": `http://www.omdbapi.com/?t=${title[title.length-1]}&apikey=${apikey}`
     })
@@ -59,20 +59,22 @@ function getTitle() {
   }
 
 
-  function handleSubmit(event) {
-    console.log(event, "event")
-    event.target.id === 'yes' ? addMovie(watchlist => [...watchlist, movie]) && createMovie({ watchlist }) && console.log("this is watchlist", watchlist): console.log("nothing to show here") && displayMovie()
-      console.log("watchlist", watchlist)
+  function handleSubmit() {
+    console.log("this is handle submit and this is watchlist", watchlist)
+   
+      createMovie({ watchlist })
+
       history.push("/swipe/new");
-      displayMovie();
+      getTitle()
     }
   
   function createMovie(movie) {
-    console.log("2")
     console.log("this is create movie")
+    console.log("movie on create movie", movie)
     return API.post("swipe", "/swipe", {
+      
       body: movie
-    
+      
     });
   }
 
@@ -95,7 +97,7 @@ function getTitle() {
         </LoaderButton>
         <LoaderButton
           id="no"
-          onClick={handleSubmit} 
+          onClick={getTitle} 
           block
           type="submit"
           size="md"

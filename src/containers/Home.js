@@ -24,6 +24,7 @@ export default function Home() {
       try {
         const movies = await loadMovies();
         setMovies(movies);
+        console.log("movies baby movies", movies)
       } catch (e) {
         onError(e);
       }
