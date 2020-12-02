@@ -4,7 +4,7 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import NewMovie from "./containers/NewMovie";
+import SwipeRight from "./containers/SwipeRight";
 import Movies from "./containers/Movies";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
@@ -32,7 +32,7 @@ export default function Routes() {
         <Settings />
       </AuthenticatedRoute>
     <AuthenticatedRoute exact path="/swipe/new">
-        <NewMovie />
+        <SwipeRight />
     </AuthenticatedRoute>
     <AuthenticatedRoute exact path="/swipe/:id">
         <Movies />

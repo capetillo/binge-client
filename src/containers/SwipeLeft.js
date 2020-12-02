@@ -1,81 +1,61 @@
 import React, { useEffect, useState, useRef} from "react";
-import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import { API } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
 import LoaderButton from "../components/LoaderButton";
-import { onError } from "../libs/errorLib";
-import config from "../config";
-import "./NewMovie.css";
+import "./SwipeLeft.css";
 var axios = require("axios");
 
 
-export default function NewMovie() {
-  const [watchlist, addMovie] = useState([]);
+export default function SwipeLeft() {
   const [movie, showMovie] = useState("")
   const [poster, showPoster] = useState("")
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
 
 
-  //randomizes omdb id
+
+function randomId() {
   let number = Math.random();
   let num = number.toString();
   let fixedNum = num.split('.').join("");
   let length = 7;
   let trimmedString = fixedNum.substring(0, length);
   let letters = 'tt';
-  let omdb_id = letters.concat(trimmedString)
-  console.log(omdb_id, "id")
+  let theId = letters.concat(trimmedString)
+  console.log(theId, "id")
+  return theId
+}
 
-  //randomizes a movie first thing
+  let url = `http://www.omdbapi.com/?i=${randomId()}&apikey=db2195e`
+
   useEffect(() => {
     randomizeMovie()
   }, [])
 
-  function randomizeMovie() {
+
+  function randomizeMovie(event) {
+    console.log("Event", event)
     axios({
       "method": "GET",
-      "url": `http://www.omdbapi.com/?i=${omdb_id}&apikey=${process.env.REACT_APP_API_KEY}`
-    }).then((response) => {
-      showMovie(response.data.Title, response.data.Poster)
+      "url": `${url}`
+    })
+      .then((response) => {
+      showMovie(response.data.Title)
       showPoster(response.data.Poster)
-      addMovie(watchlist.concat(movie))
-      console.log("watchlist", watchlist)
-    
+      console.log("movie bb2", movie)
     })
     .catch((err) => {
       console.log(err, "error")
     })
   }
-    
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-  
-    // setIsLoading(true);
-  
-    try {
 
 
-      await createMovie({ watchlist });
+  function handleSubmit(event) {
+      event.preventDefault()
+      console.log("event", event)
       history.push("/swipe/new");
-      console.log("watchlist", watchlist)
-    } catch (e) {
-      onError(e);
-      setIsLoading(false);
+      randomizeMovie();
     }
-    randomizeMovie();
-    addMovie();
-
-  }
-
   
-  function createMovie(movie) {
-    return API.post("swipe", "/swipe", {
-      body: movie
-    });
-  }
+
 
 
   return (
@@ -84,18 +64,7 @@ export default function NewMovie() {
         <img src={poster} alt="poster"/>
         <p>{movie}</p>
         <LoaderButton
-          onClick={handleSubmit}
-          block
-          type="submit"
-          size="md"
-          variant="primary"
-          isLoading={isLoading}
-          // disabled={!validateForm()}
-        >
-          love it
-        </LoaderButton>
-        <LoaderButton
-          onClick={randomizeMovie} //on click randomize
+          onClick={handleSubmit} //on click randomize
           block
           type="submit"
           size="md"
