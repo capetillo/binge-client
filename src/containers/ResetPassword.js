@@ -70,7 +70,7 @@ export default function ResetPassword() {
   function renderRequestCodeForm() {
     return (
       <form onSubmit={handleSendCodeClick}>
-        <FormGroup bsSize="large" controlId="email">
+        <FormGroup controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -82,7 +82,6 @@ export default function ResetPassword() {
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
           isLoading={isSendingCode}
           disabled={!validateCodeForm()}
         >
@@ -95,7 +94,7 @@ export default function ResetPassword() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
+        <FormGroup  controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -108,7 +107,7 @@ export default function ResetPassword() {
           </p>
         </FormGroup>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
+        <FormGroup controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -116,7 +115,7 @@ export default function ResetPassword() {
             onChange={handleFieldChange}
           />
         </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
+        <FormGroup  controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
@@ -127,7 +126,6 @@ export default function ResetPassword() {
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
           isLoading={isConfirming}
           disabled={!validateResetForm()}
         >

@@ -8,8 +8,6 @@ import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import "./Home.css";
 
-
-
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const { isAuthenticated } = useAppContext();
@@ -37,6 +35,7 @@ export default function Home() {
 
   function loadMovies() {
     return API.get("swipe", "/swipe");
+    
   }
 
   function renderMoviesList(movies) {
@@ -48,10 +47,14 @@ export default function Home() {
             <span className="ml-2 font-weight-bold">swipe on movies</span>
           </ListGroup.Item>
         </LinkContainer>
-        {movies.map(({ swipeId, createdAt }) => (
+        {movies.map(({ swipeId, createdAt, movies }) => (
           <LinkContainer key={swipeId} to={`/swipe/${swipeId}`}>
             <ListGroup.Item action>
+            <span className="font-weight-bold">
+                this is movies.title: {movies}
+              </span>
               <span className="font-weight-bold">
+                
               </span>
               <br />
               <span className="text-muted">
