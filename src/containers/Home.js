@@ -47,15 +47,13 @@ export default function Home() {
             <span className="ml-2 font-weight-bold">swipe on movies</span>
           </ListGroup.Item>
         </LinkContainer>
-        {movies.map(({ swipeId, createdAt, content }) => (
+        {movies.map(({ swipeId, createdAt, content, poster }) => (
           <LinkContainer key={swipeId} to={`/swipe/${swipeId}`}>
             <ListGroup.Item action>
             <span className="font-weight-bold">
                 this is movies: {content.trim().split('"')}
               </span>
-              <span className="font-weight-bold">
-                
-              </span>
+              <img src={poster} alt="poster" />
               <br />
               <span className="text-muted">
                 Created: {new Date(createdAt).toLocaleString()}

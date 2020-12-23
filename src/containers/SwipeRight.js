@@ -55,7 +55,8 @@ function getTitle() {
   function handleSubmit(event) {
     event.preventDefault()
     console.log("content on handle submit", content)
-    createMovie(content)
+    console.log("poster on handle submit", poster)
+    createMovie({ content, poster })
     history.push("/swipe/new");
       getTitle()
     }
