@@ -14,8 +14,7 @@ var axios = require("axios");
 
 
 export default function SwipeRight() {
-  const [content, addMovie] = useState([]);
-  const [movie, showMovieTitle] = useState([]);
+  const [content, showMovieTitle] = useState();
   const [poster, showPoster] = useState("");
   const [title, apiTitle] = useState([])
   const history = useHistory();
@@ -24,8 +23,6 @@ export default function SwipeRight() {
   useEffect(() => {
     getTitle()
   }, [])
-
-
 
 function getTitle() {
     csv(data)
@@ -40,8 +37,6 @@ function getTitle() {
   }
   
   async function displayMovie() {
-    
-    console.log("title on display movie", title)
       await axios({
       "method": "GET",
       "url": `http://www.omdbapi.com/?t=${title[title.length-1]}&apikey=db2195e`
@@ -58,10 +53,8 @@ function getTitle() {
 
 
   function handleSubmit(event) {
-    console.log("this is event", event)
     event.preventDefault()
-    console.log("movie on handle submit", movie)
-    content.push({"title": movie})
+    console.log("content on handle submit", content)
     createMovie(content)
     history.push("/swipe/new");
       getTitle()
@@ -84,7 +77,7 @@ function getTitle() {
         <Card.Body>
           <Card.Title value={content}>
             
-            {movie}
+            {content}
             </Card.Title>
           <Card.Text>
             Some quick example text to build on the card title and make up the bulk of
